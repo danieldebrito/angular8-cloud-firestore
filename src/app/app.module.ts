@@ -24,6 +24,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { PiePaginaComponent } from './components/pie-pagina/pie-pagina.component';
 import { from } from 'rxjs';
+import { ClienteService } from './servicios/cliente.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { from } from 'rxjs';
     AngularFireAuthModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [],
+  providers: [ClienteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
