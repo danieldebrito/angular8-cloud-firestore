@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { Cliente } from 'src/app/class/cliente';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -19,6 +18,8 @@ export class ClienteService {
     this.clientesColeccion = db.collection('clientes', ref => ref.orderBy('nombre', 'asc'));
   }
 
+
+  // esto sale de la documentacion =>
   getClientes(): Observable<Cliente[]> {
     this.clientes = this.clientesColeccion.snapshotChanges().pipe(
       map( cambios => {
