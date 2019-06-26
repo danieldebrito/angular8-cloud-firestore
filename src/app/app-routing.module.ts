@@ -18,7 +18,7 @@ const appRoutes: Routes = [
   { path: 'registrarse', component: RegistroComponent },
   { path: 'pageNotFound', component: PageNotFoundComponent },
   { path: 'configuracion', component: ConfiguracionComponent },
-  { path: 'cliente/editar/:id', component: ConfiguracionComponent },
+  { path: 'cliente/editar/:id', component: EditarClienteComponent },
   {
     path: '',
     redirectTo: '/home',
