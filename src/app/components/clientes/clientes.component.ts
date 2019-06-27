@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { Cliente } from 'src/app/class/cliente';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-clientes',
@@ -17,6 +18,10 @@ export class ClientesComponent implements OnInit {
     email: '',
     saldo: 0
   };
+
+  @ViewChild('clienteForm', {static: false}) clienteForm: NgForm;
+  @ViewChild('botonCerrar', {static: false}) botonCerrar: ElementRef;
+
 
   constructor(
     private clienteServicio: ClienteService,
@@ -39,8 +44,14 @@ export class ClientesComponent implements OnInit {
       });
     } else {
       // agregar servicio de cliente
+      this.clienteServicio.agregarCliente(value);
+      this.clienteForm.resetForm();
+      this.cerrarModal();
     }
 
+  }
+  cerrarModal() {
+    this.botonCerrar.nativeElement.click();
   }
 
   ngOnInit() {
