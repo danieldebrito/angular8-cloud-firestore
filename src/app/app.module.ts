@@ -3,6 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+
+// services
+import { LoginService } from './servicios/login.service';
+import { ClienteService } from './servicios/cliente.service';
+import { ConfiguracionService } from './servicios/configuracion.service';
+// guards
+import { AuthGuard } from './guardianes/auth.guard';
+import { ConfiguracionGuard } from './guardianes/configuracion.guard';
+
 // firestore
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -23,8 +32,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { PiePaginaComponent } from './components/pie-pagina/pie-pagina.component';
-import { from } from 'rxjs';
-import { ClienteService } from './servicios/cliente.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +58,14 @@ import { ClienteService } from './servicios/cliente.service';
     AngularFireAuthModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [ClienteService],
+  providers: [
+    ClienteService,
+    LoginService,
+    AuthGuard,
+    ConfiguracionService,
+    ConfiguracionGuard,
+    { provide: FirestoreSettingsToken, useValue: {}}
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

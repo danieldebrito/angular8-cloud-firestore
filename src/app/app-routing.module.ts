@@ -9,22 +9,17 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { EditarClienteComponent } from './components/editar-cliente/editar-cliente.component';
-
-
+import { AuthGuard } from './guardianes/auth.guard';
+import { ConfiguracionGuard } from './guardianes/configuracion.guard';
 
 const appRoutes: Routes = [
-  { path: 'home', component: TableroComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'registrarse', component: RegistroComponent },
-  { path: 'pageNotFound', component: PageNotFoundComponent },
-  { path: 'configuracion', component: ConfiguracionComponent },
-  { path: 'cliente/editar/:id', component: EditarClienteComponent },
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-  { path: '**', component: PageNotFoundComponent },
+  {path: '', component: TableroComponent, canActivate: [AuthGuard]},
+  {path: 'home', component: TableroComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'registrarse', component: RegistroComponent, canActivate: [ConfiguracionGuard]},
+  {path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard]},
+  {path: 'cliente/editar/:id', component: EditarClienteComponent, canActivate: [AuthGuard]},
+  {path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({
@@ -42,5 +37,3 @@ const appRoutes: Routes = [
   declarations: []
 })
 export class AppRoutingModule { }
-
-
